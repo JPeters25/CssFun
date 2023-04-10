@@ -1,0 +1,272 @@
+/* glowing circle practice project found at https://codepen.io/maxvoltar/pen/zmWjdL?editors=1100 */
+
+:root{
+  --r: #ff0000;
+  --o: #ff7300; 
+  --y: #fffb00; 
+  --g: #48ff00;
+  --c: #00ffd5; 
+  --b: #002bff;
+  --p: #7a00ff; 
+  --m: #ff00c8;
+  --k: black;
+  --easeInOutQuad: cubic-bezier(0.455, 0.030, 0.515, 0.955);
+  ;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  text-decoration: none;
+  list-style: none;
+  outline: none;
+  box-sizing: border-box;
+}
+
+body {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+ul {
+  width: 30vw;
+  height: 30vw;
+  position: absolute;
+  z-index: -5;
+}
+
+:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: radial-gradient(60% 40% 40% 60% var(--k));
+    border-radius: 50%;
+  }
+
+li {
+  border-radius: 50%;
+  background-color: var(--o);
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  animation: aura 30s infinite linear;
+  mix-blend-mode: screen;
+  filter: blur(1vw);
+  z-index: 5;
+  }
+  :nth-child(2) {
+      background-color: var(--k);
+    }
+  :nth-child(3) {
+      background-color: var(--r);
+      animation-delay: -10s;
+      z-index: -5;
+    }
+  :nth-child(4) {
+      background-color: var(--k);
+      animation-direction: reverse;
+      animation-delay: -20s;
+      z-index: -5;
+    }
+  :nth-child(5) {
+      background-color: var(--y);
+      animation-direction: reverse;
+      animation-delay: -30s;
+      z-index: -5;
+    }
+  :nth-child(6) {
+      background-color: var(--g);
+      animation-direction: reverse;
+      animation-delay: -40s;
+      z-index: -5;
+    }
+  :nth-child(7) {
+      background-color: var(--c);
+      animation-direction: reverse;
+      animation-delay: -50s;
+      z-index: -5;
+    }
+  :nth-child(8) {
+      background-color: var(--b);
+      animation-direction: reverse;
+      animation-delay: -60s;
+      z-index: -5;
+    }
+  :nth-child(9) {
+      background-color: var(--p);
+      animation-direction: reverse;
+      animation-delay: -70s;
+      z-index: -5;
+    }
+  :nth-child(10) {
+      background-color: var(--m);
+      animation-direction: reverse;
+      animation-delay: -70s;
+      z-index: -1;
+    }
+
+.circle {
+  height: 32vw;
+  width: 32vw;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 1;
+}
+
+
+@keyframes aura {
+  25%,
+  75% {
+    border-radius: 60% 40% 40% 60%;
+  }
+  50% {
+    border-radius: 40% 60% 60% 40%;
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/*---------------------------------------- glowing text found at https://codepen.io/valhead/full/ExmpPQ -----------------------------------------------------------*/
+
+@font-face {
+  font-family: Monoton;
+  src:url(../font/Monoton-Regular.ttf);
+}
+
+p {
+  --interval: 1s;
+  display: block;
+  text-shadow: 
+    0 0 10px var(--color1),
+    0 0 20px var(--color2),
+    0 0 40px var(--color3),
+    0 0 80px var(--color4);
+  will-change: filter, color;
+  filter: saturate(60%);
+  animation: flicker steps(100) var(--interval) 1s infinite;
+}
+
+p:nth-of-type(1) {
+  color: yellow;
+  --color1: yellow;
+  --color2: lime;
+  --color3: green;
+  --color4: darkgreen;
+  font-family: Monoton;
+  z-index: 1111;
+  position: absolute;
+  font-size: 90px;
+}
+
+@keyframes flicker {
+  50% {
+    color: white;
+    filter: saturate(200%) hue-rotate(20deg);
+  }
+}
+/* -----------------------------------glowing button found at https://codepen.io/leandrosimoes/pen/VqZxaG -----------------------------------------------------*/
+
+.glow-on-hover {
+  width: 220px;
+  height: 50px;
+  border: none;
+  outline: none;
+  color: #fff;
+  background: black;
+  cursor: pointer;
+  position: absolute;
+  z-index: 1115;
+  border-radius: 10px;
+  top: 620px;
+}
+
+.glow-on-hover:before {
+  content: '';
+  background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  position: absolute;
+  top: -2px;
+  left:-2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing 20s linear infinite;
+  opacity: 0;
+  transition: opacity .3s ease-in-out;
+  border-radius: 10px;
+}
+
+.glow-on-hover:active {
+  color: black;
+}
+
+.glow-on-hover:active:after {
+  background: transparent;
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.glow-on-hover:hover:before {
+  opacity: 1;
+
+}
+
+.glow-on-hover:after {
+  z-index: -1;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #111;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+
+@keyframes glowing {
+  0% { background-position: 0 0; }
+  50% { background-position: 400% 0; }
+  100% { background-position: 0 0; }
+}
+
+/* -------------------------------------scrolling image found at https://css-tricks.com/creating-a-css-sliding-background-effect/ ----------------------------------------------------------*/
+.wrapper {
+  overflow: hidden;
+  z-index: -2;
+}
+
+.sliding-background {
+  background: url(https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Portland_Night_panorama.jpg/1280px-Portland_Night_panorama.jpg) repeat-x;
+  height: 250px;
+  width: 5076px;
+  animation: slide 60s linear infinite;
+  z-index: -5;
+}
+
+@keyframes slide{
+  0%{
+    transform: translate3d(0, 0, 0);
+  }
+  100%{
+    transform: translate3d(-1692px, 0, 0);
+  }
+}
+
